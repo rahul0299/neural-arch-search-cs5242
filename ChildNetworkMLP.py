@@ -47,6 +47,46 @@ class ChildModel(nn.Module):
     def forward(self, x):
         return self.model(x)
 
+def train_model_v2(model, data,label, criterion, optimizer, device):
+    model.train()  # Set the model to training mode
+    total_loss = 0  # Total loss of the model
+    start_time = time.time()  # Start time of the training
+    bs = 200
+
+    for iter in range(1, len(data),bs):
+        # Set dL/dU, dL/dV, dL/dW to be filled with zeros
+        optimizer.zero_grad()
+
+        # create a minibatch
+        indices = torch.LongTensor(bs).random_(0, len(data))
+        minibatch_data = data[indices]
+        minibatch_label = label[indices]
+
+        # reshape the minibatch
+        inputs = minibatch_data.view(bs, input_dim)
+
+        # tell Pytorch to start tracking all operations that will be done on "inputs"
+        inputs.requires_grad_()
+
+        # forward the minibatch through the net
+        scores = model(inputs)
+
+        # Compute the average of the losses of the data points in the minibatch
+        loss = criterion(scores, minibatch_label)
+
+        # backward pass to compute dL/dU, dL/dV and dL/dW
+        loss.backward()
+
+        # do one step of stochastic gradient descent: U=U-lr(dL/dU), V=V-lr(dL/dU), ...
+        optimizer.step()
+
+        total_loss += loss.detach().item()
+
+
+    elapsed_time = time.time() - start_time
+    return total_loss / len(data), elapsed_time
+
+
 
 def train_model(model, train_loader, criterion, optimizer, device):
     """
