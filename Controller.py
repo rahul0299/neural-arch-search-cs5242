@@ -20,3 +20,52 @@
 ### Network Output ->   [["START"], ..... upto 5 numbers, ["END"]]
 #### Example1  ->  [["START"], [5], [2], [8], [7], [6], ["END"]]
 #### Example2 ->  [["START"], [4], [3], [8], ["END"]]
+
+import torch
+import torch.nn as nn
+import torch.optim as optim
+import torch.nn.functional as F
+
+# Define vocabulary
+VOCAB = {"START": 0, "END": 1, **{str(i): i + 1 for i in range(1, 11)}}  # 1-10 neurons
+IDX_TO_TOKEN = {v: k for k, v in VOCAB.items()}
+VOCAB_SIZE = len(VOCAB)
+
+
+class RNNController(nn.Module):
+    def __init__(self, vocab_size, embedding_dim=16, hidden_dim=32, num_layers=1):
+        super(RNNController, self).__init__()
+        self.embedding = nn.Embedding(vocab_size, embedding_dim)
+        self.rnn = nn.LSTM(embedding_dim, hidden_dim, num_layers, batch_first=True)
+        self.fc = nn.Linear(hidden_dim, vocab_size)  # Output size = vocab_size
+
+    def forward(self, x, hidden=None):
+        x = self.embedding(x)  # Convert token indices to embeddings
+        output, hidden = self.rnn(x, hidden)  # Pass through LSTM
+        logits = self.fc(output)  # Predict next token
+        return logits, hidden
+
+
+# Function to sample a sequence
+def generate_sequence(model, max_layers=5):
+    model.eval()
+    start_token = torch.tensor([[VOCAB["START"]]])
+    hidden = None
+    sequence = ["START"]
+    input_token = start_token
+
+    for _ in range(max_layers):
+        logits, hidden = model(input_token, hidden)
+        probs = F.softmax(logits[:, -1, :], dim=-1)  # Convert to probabilities
+        sampled_token = torch.multinomial(probs, 1).item()  # Sample from distribution
+        sequence.append(IDX_TO_TOKEN[sampled_token])
+        if sampled_token == VOCAB["END"]:
+            break
+        input_token = torch.tensor([[sampled_token]])
+
+    return sequence
+
+
+# Initialize the model
+model = RNNController(VOCAB_SIZE)
+print(generate_sequence(model))  # Generate a sample sequence
