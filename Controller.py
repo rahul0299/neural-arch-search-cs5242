@@ -63,6 +63,8 @@ def generate_sequence(model, max_layers=5):
             break
         input_token = torch.tensor([[sampled_token]])
 
+    if sequence[-1] != "END":
+        sequence.append("END")
     return sequence
 
 
