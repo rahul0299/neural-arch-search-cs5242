@@ -1,0 +1,789 @@
+------ ITERATION 1 ------
+Model encoding: ['START', '2', '3', '4', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=64, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=64, out_features=128, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=128, out_features=256, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=256, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 2.073080662250519 with train time: 77.64200782775879
+CHILD MODEL ACCURACY: 0.2542
+Advantage: tensor(0.2542) Baseline: 0.02541999999999999
+Policy loss: 1.3675241470336914
+
+------ ITERATION 2 ------
+Model encoding: ['START', '3', '6', '4', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=128, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=128, out_features=1024, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=1024, out_features=256, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=256, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 2.056924598693848 with train time: 80.68972706794739
+CHILD MODEL ACCURACY: 0.2514
+Advantage: tensor(0.2260) Baseline: 0.04801799999999999
+Policy loss: 1.3185923099517822
+
+------ ITERATION 3 ------
+Model encoding: ['START', '5', '2', '4', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=64, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=64, out_features=256, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=256, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 2.0707675790786744 with train time: 110.40989017486572
+CHILD MODEL ACCURACY: 0.2437
+Advantage: tensor(0.1957) Baseline: 0.06758619999999999
+Policy loss: 1.1107341051101685
+
+------ ITERATION 4 ------
+Model encoding: ['START', '3', '6', '4', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=128, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=128, out_features=1024, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=1024, out_features=256, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=256, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 2.0352928328514097 with train time: 81.72484683990479
+CHILD MODEL ACCURACY: 0.263
+Advantage: tensor(0.1954) Baseline: 0.08712757999999998
+Policy loss: 1.1375070810317993
+
+------ ITERATION 5 ------
+Model encoding: ['START', '5', '3', '1', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=128, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=128, out_features=32, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=32, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 2.12188031578064 with train time: 114.03452801704407
+CHILD MODEL ACCURACY: 0.2124
+Advantage: tensor(0.1253) Baseline: 0.09965482199999998
+Policy loss: 0.7791122198104858
+
+------ ITERATION 6 ------
+Model encoding: ['START', '6', '6', '6', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=1024, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=1024, out_features=1024, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=1024, out_features=1024, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=1024, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 2.0580833501815796 with train time: 191.7899351119995
+CHILD MODEL ACCURACY: 0.2659
+Advantage: tensor(0.1662) Baseline: 0.11627933979999996
+Policy loss: 1.0798486471176147
+
+------ ITERATION 7 ------
+Model encoding: ['START', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 1.8284545650482178 with train time: 55.80439901351929
+CHILD MODEL ACCURACY: 0.3728
+Advantage: tensor(0.2565) Baseline: 0.14193140581999997
+Policy loss: 0.4909244775772095
+
+------ ITERATION 8 ------
+Model encoding: ['START', '2', '1', '3', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=64, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=64, out_features=32, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=32, out_features=128, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=128, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 2.054214068889618 with train time: 81.41233420372009
+CHILD MODEL ACCURACY: 0.2495
+Advantage: tensor(0.1076) Baseline: 0.15268826523799997
+Policy loss: 0.5989053249359131
+
+------ ITERATION 9 ------
+Model encoding: ['START', '3', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=128, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=128, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 1.8770042448043822 with train time: 85.98957896232605
+CHILD MODEL ACCURACY: 0.3496
+Advantage: tensor(0.1969) Baseline: 0.17237943871419997
+Policy loss: 0.7347551584243774
+
+------ ITERATION 10 ------
+Model encoding: ['START', '3', '5', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=128, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=128, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 1.9515075535774231 with train time: 81.20607376098633
+CHILD MODEL ACCURACY: 0.3053
+Advantage: tensor(0.1329) Baseline: 0.18567149484277998
+Policy loss: 0.7919585704803467
+
+------ ITERATION 11 ------
+Model encoding: ['START', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 1.8286072216033935 with train time: 46.99191188812256
+CHILD MODEL ACCURACY: 0.372
+Advantage: tensor(0.1863) Baseline: 0.20430434535850198
+Policy loss: 0.3563303053379059
+
+------ ITERATION 12 ------
+Model encoding: ['START', '4', '4', '6', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=256, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=256, out_features=256, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=256, out_features=1024, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=1024, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 2.054320032119751 with train time: 95.06146478652954
+CHILD MODEL ACCURACY: 0.2582
+Advantage: tensor(0.0539) Baseline: 0.20969391082265176
+Policy loss: 0.31826359033584595
+
+------ ITERATION 13 ------
+Model encoding: ['START', '2', '4', '1', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=64, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=64, out_features=256, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=256, out_features=32, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=32, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 2.124162262916565 with train time: 79.73999190330505
+CHILD MODEL ACCURACY: 0.217
+Advantage: tensor(0.0073) Baseline: 0.2104245197403866
+Policy loss: 0.041819002479314804
+
+------ ITERATION 14 ------
+Model encoding: ['START', '2', '2', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=64, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=64, out_features=64, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=64, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 1.9705739960670472 with train time: 64.6559739112854
+CHILD MODEL ACCURACY: 0.2979
+Advantage: tensor(0.0875) Baseline: 0.21917206776634793
+Policy loss: 0.45714500546455383
+
+------ ITERATION 15 ------
+Model encoding: ['START', '2', '6', '6', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=64, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=64, out_features=1024, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=1024, out_features=1024, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=1024, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 1.9802601671218871 with train time: 117.7777693271637
+CHILD MODEL ACCURACY: 0.2822
+Advantage: tensor(0.0630) Baseline: 0.22547486098971314
+Policy loss: 0.3725300133228302
+
+------ ITERATION 16 ------
+Model encoding: ['START', '6', '1', '5', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=1024, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=1024, out_features=32, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=32, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 2.0226219711303712 with train time: 136.41359519958496
+CHILD MODEL ACCURACY: 0.2619
+Advantage: tensor(0.0364) Baseline: 0.22911737489074183
+Policy loss: 0.2344135046005249
+
+------ ITERATION 17 ------
+Model encoding: ['START', '2', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=64, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=64, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 1.8848855686187744 with train time: 55.84501504898071
+CHILD MODEL ACCURACY: 0.3381
+Advantage: tensor(0.1090) Baseline: 0.24001563740166765
+Policy loss: 0.3881698250770569
+
+------ ITERATION 18 ------
+Model encoding: ['START', '4', '2', '4', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=256, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=256, out_features=64, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=64, out_features=256, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=256, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 2.0845015993118285 with train time: 73.57927918434143
+CHILD MODEL ACCURACY: 0.2435
+Advantage: tensor(0.0035) Baseline: 0.24036407366150087
+Policy loss: 0.018654419109225273
+
+------ ITERATION 19 ------
+Model encoding: ['START', '2', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=64, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=64, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 1.8862529935836791 with train time: 52.11720085144043
+CHILD MODEL ACCURACY: 0.3448
+Advantage: tensor(0.1044) Baseline: 0.2508076662953508
+Policy loss: 0.3717391788959503
+
+------ ITERATION 20 ------
+Model encoding: ['START', '2', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=64, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=64, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 1.8908710026741027 with train time: 52.32501292228699
+CHILD MODEL ACCURACY: 0.3414
+Advantage: tensor(0.0906) Baseline: 0.2598668996658157
+Policy loss: 0.32231980562210083
+
+------ ITERATION 21 ------
+Model encoding: ['START', '2', '4', '4', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=64, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=64, out_features=256, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=256, out_features=256, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=256, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 2.0532315325737 with train time: 72.20119881629944
+CHILD MODEL ACCURACY: 0.2514
+Advantage: tensor(-0.0085) Baseline: 0.2590202096992341
+Policy loss: -0.0460137315094471
+
+------ ITERATION 22 ------
+Model encoding: ['START', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 1.8276778664588929 with train time: 42.00973105430603
+CHILD MODEL ACCURACY: 0.3708
+Advantage: tensor(0.1118) Baseline: 0.2701981887293107
+Policy loss: 0.21292215585708618
+
+------ ITERATION 23 ------
+Model encoding: ['START', '4', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=256, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=256, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 1.8813394861221313 with train time: 67.57702302932739
+CHILD MODEL ACCURACY: 0.3471
+Advantage: tensor(0.0769) Baseline: 0.2778883698563796
+Policy loss: 0.29200538992881775
+
+------ ITERATION 24 ------
+Model encoding: ['START', '3', '3', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=128, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=128, out_features=128, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=128, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 1.952064667224884 with train time: 64.41064310073853
+CHILD MODEL ACCURACY: 0.3106
+Advantage: tensor(0.0327) Baseline: 0.28115953287074164
+Policy loss: 0.18138086795806885
+
+------ ITERATION 25 ------
+Model encoding: ['START', '5', '2', '4', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=64, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=64, out_features=256, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=256, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 2.057121334552765 with train time: 134.35032773017883
+CHILD MODEL ACCURACY: 0.2437
+Advantage: tensor(-0.0375) Baseline: 0.27741357958366747
+Policy loss: -0.21253180503845215
+
+------ ITERATION 26 ------
+Model encoding: ['START', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 1.8284776167869567 with train time: 46.2474479675293
+CHILD MODEL ACCURACY: 0.3758
+Advantage: tensor(0.0984) Baseline: 0.28725222162530073
+Policy loss: 0.18704426288604736
+
+------ ITERATION 27 ------
+Model encoding: ['START', '5', '4', '2', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=256, out_features=64, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=64, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 2.0963513803482057 with train time: 125.12872505187988
+CHILD MODEL ACCURACY: 0.2413
+Advantage: tensor(-0.0460) Baseline: 0.2826569994627707
+Policy loss: -0.26087290048599243
+
+------ ITERATION 28 ------
+Model encoding: ['START', '1', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=32, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=32, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 1.8957039527893067 with train time: 46.09315204620361
+CHILD MODEL ACCURACY: 0.3397
+Advantage: tensor(0.0570) Baseline: 0.28836129951649364
+Policy loss: 0.2307254523038864
+
+------ ITERATION 29 ------
+Model encoding: ['START', '4', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=256, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=256, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 1.87318523645401 with train time: 70.93700504302979
+CHILD MODEL ACCURACY: 0.3516
+Advantage: tensor(0.0632) Baseline: 0.29468516956484425
+Policy loss: 0.23978565633296967
+
+------ ITERATION 30 ------
+Model encoding: ['START', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 1.8272710785865784 with train time: 45.15577411651611
+CHILD MODEL ACCURACY: 0.3691
+Advantage: tensor(0.0744) Baseline: 0.30212665260835986
+Policy loss: 0.1411411464214325
+
+------ ITERATION 31 ------
+Model encoding: ['START', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 1.8273186078071595 with train time: 46.64523696899414
+CHILD MODEL ACCURACY: 0.3723
+Advantage: tensor(0.0702) Baseline: 0.30914398734752385
+Policy loss: 0.13300687074661255
+
+------ ITERATION 32 ------
+Model encoding: ['START', '1', '3', '4', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=32, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=32, out_features=128, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=128, out_features=256, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=256, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 2.0393084926605223 with train time: 64.04192423820496
+CHILD MODEL ACCURACY: 0.2547
+Advantage: tensor(-0.0544) Baseline: 0.30369958861277147
+Policy loss: -0.3168921172618866
+
+------ ITERATION 33 ------
+Model encoding: ['START', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 1.828663278579712 with train time: 36.70679211616516
+CHILD MODEL ACCURACY: 0.3715
+Advantage: tensor(0.0678) Baseline: 0.31047962975149435
+Policy loss: 0.12832771241664886
+
+------ ITERATION 34 ------
+Model encoding: ['START', '3', '2', '5', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=128, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=128, out_features=64, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=64, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 2.059728051662445 with train time: 70.0635073184967
+CHILD MODEL ACCURACY: 0.2495
+Advantage: tensor(-0.0610) Baseline: 0.3043816667763449
+Policy loss: -0.34121569991111755
+
+------ ITERATION 35 ------
+Model encoding: ['START', '1', '2', '5', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=32, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=32, out_features=64, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=64, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 2.029711975097656 with train time: 66.37492799758911
+CHILD MODEL ACCURACY: 0.2553
+Advantage: tensor(-0.0491) Baseline: 0.2994735000987104
+Policy loss: -0.29498490691185
+
+------ ITERATION 36 ------
+Model encoding: ['START', '6', '3', '5', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=1024, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=1024, out_features=128, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=128, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 2.0781733441352843 with train time: 149.52147793769836
+CHILD MODEL ACCURACY: 0.2532
+Advantage: tensor(-0.0463) Baseline: 0.29484615008883935
+Policy loss: -0.2870573401451111
+
+------ ITERATION 37 ------
+Model encoding: ['START', '2', '6', '6', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=64, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=64, out_features=1024, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=1024, out_features=1024, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=1024, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 1.9714453821182252 with train time: 103.42191815376282
+CHILD MODEL ACCURACY: 0.2868
+Advantage: tensor(-0.0080) Baseline: 0.2940415350799554
+Policy loss: -0.04735540598630905
+
+------ ITERATION 38 ------
+Model encoding: ['START', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 1.8279338879585265 with train time: 39.25473213195801
+CHILD MODEL ACCURACY: 0.371
+Advantage: tensor(0.0770) Baseline: 0.30173738157195984
+Policy loss: 0.14515896141529083
+
+------ ITERATION 39 ------
+Model encoding: ['START', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 1.828509271144867 with train time: 38.202189683914185
+CHILD MODEL ACCURACY: 0.3693
+Advantage: tensor(0.0676) Baseline: 0.3084936434147638
+Policy loss: 0.12734991312026978
+
+------ ITERATION 40 ------
+Model encoding: ['START', '5', '1', '6', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=32, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=32, out_features=1024, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=1024, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 1.9394062433242798 with train time: 123.38434410095215
+CHILD MODEL ACCURACY: 0.2914
+Advantage: tensor(-0.0171) Baseline: 0.3067842790732874
+Policy loss: -0.1105073094367981
+
+------ ITERATION 41 ------
+Model encoding: ['START', '4', '5', '3', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=256, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=256, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=128, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=128, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 2.06415479183197 with train time: 80.88563108444214
+CHILD MODEL ACCURACY: 0.2457
+Advantage: tensor(-0.0611) Baseline: 0.3006758511659587
+Policy loss: -0.3693321943283081
+
+------ ITERATION 42 ------
+Model encoding: ['START', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 1.8264669160842895 with train time: 47.824800968170166
+CHILD MODEL ACCURACY: 0.3715
+Advantage: tensor(0.0708) Baseline: 0.30775826604936285
+Policy loss: 0.13322125375270844
+
+------ ITERATION 43 ------
+Model encoding: ['START', '2', '3', '3', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=64, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=64, out_features=128, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=128, out_features=128, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=128, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 2.086044816493988 with train time: 80.48734307289124
+CHILD MODEL ACCURACY: 0.2278
+Advantage: tensor(-0.0800) Baseline: 0.2997624394444266
+Policy loss: -0.4245744049549103
+
+------ ITERATION 44 ------
+Model encoding: ['START', '1', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=32, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=32, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 1.8890921878814697 with train time: 47.19173789024353
+CHILD MODEL ACCURACY: 0.3344
+Advantage: tensor(0.0346) Baseline: 0.3032261954999839
+Policy loss: 0.13955214619636536
+
+------ ITERATION 45 ------
+Model encoding: ['START', '4', '4', '4', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=256, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=256, out_features=256, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=256, out_features=256, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=256, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 2.091572883605957 with train time: 84.2214560508728
+CHILD MODEL ACCURACY: 0.2235
+Advantage: tensor(-0.0797) Baseline: 0.2952535759499855
+Policy loss: -0.4547600746154785
+
+------ ITERATION 46 ------
+Model encoding: ['START', '2', '1', '3', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=64, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=64, out_features=32, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=32, out_features=128, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=128, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 2.121677990913391 with train time: 83.02540397644043
+CHILD MODEL ACCURACY: 0.2013
+Advantage: tensor(-0.0940) Baseline: 0.285858218354987
+Policy loss: -0.5247084498405457
+
+------ ITERATION 47 ------
+Model encoding: ['START', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 1.8279286675453186 with train time: 43.57236289978027
+CHILD MODEL ACCURACY: 0.3719
+Advantage: tensor(0.0860) Baseline: 0.2944623965194883
+Policy loss: 0.16128234565258026
+
+------ ITERATION 48 ------
+Model encoding: ['START', '1', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=32, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=32, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 1.9005727748870849 with train time: 58.97036004066467
+CHILD MODEL ACCURACY: 0.3373
+Advantage: tensor(0.0428) Baseline: 0.29874615686753947
+Policy loss: 0.17237241566181183
+
+------ ITERATION 49 ------
+Model encoding: ['START', '6', '4', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=1024, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=1024, out_features=256, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=256, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 1.9568803939819337 with train time: 160.9950568675995
+CHILD MODEL ACCURACY: 0.3107
+Advantage: tensor(0.0120) Baseline: 0.29994154118078553
+Policy loss: 0.07057765871286392
+
+------ ITERATION 50 ------
+Model encoding: ['START', '3', '6', '3', 'END']
+ChildModel(
+  (model): Sequential(
+    (0): Linear(in_features=3072, out_features=128, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=128, out_features=1024, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=1024, out_features=128, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=128, out_features=10, bias=True)
+  )
+)
+CHILD MODEL LOSS: 2.054644787311554 with train time: 77.68006706237793
+CHILD MODEL ACCURACY: 0.2484
+Advantage: tensor(-0.0515) Baseline: 0.29478738706270696
+Policy loss: -0.3005053699016571
