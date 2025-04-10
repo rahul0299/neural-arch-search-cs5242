@@ -2,6 +2,7 @@ import torch
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import os
 cmap = sns.diverging_palette(262, 10, sep=1, n=16, s=99, l=50, center="dark", as_cmap=True) # best
 
 
@@ -314,5 +315,32 @@ def check_cifar_dataset_exists(path_data='../../data/'):
         torch.save(test_data,path_data + 'cifar/test_data.pt')
         torch.save(test_label,path_data + 'cifar/test_label.pt')
     return path_data
-    
+
+
+def save_controller(controller, optimizer, name, controller_type="CNN"):
+    save_dir = os.path.join("Models", "Controller", controller_type)
+    os.makedirs(save_dir, exist_ok=True)
+
+    path = os.path.join(save_dir, f"{name}.pt")
+
+    torch.save({
+        'model_state_dict': controller.state_dict(),
+        'optimizer_state_dict': optimizer.state_dict()
+    }, path)
+
+    print(f"Controller and optimizer saved to: {path}")
+
+
+def load_controller(controller, optimizer, name, controller_type="CNN"):
+    path = os.path.join("Models", "Controller", controller_type, f"{name}.pt")
+
+    checkpoint = torch.load(path)
+    controller.load_state_dict(checkpoint['model_state_dict'])
+    optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+    controller.eval()
+
+    print(f"Controller and optimizer loaded from: {path}")
+
+
+
         
