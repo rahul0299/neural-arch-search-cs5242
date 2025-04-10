@@ -3,6 +3,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import os
+import pandas as pd
+
+from requests.utils import default_headers
+
 cmap = sns.diverging_palette(262, 10, sep=1, n=16, s=99, l=50, center="dark", as_cmap=True) # best
 
 
@@ -342,5 +346,24 @@ def load_controller(controller, optimizer, name, controller_type="CNN"):
     print(f"Controller and optimizer loaded from: {path}")
 
 
+def save_progress(controller, optimizer, row_data, controller_type="CNN", headers=("train_loss", "test_loss", "train_acc", "test_acc", "train_time")):
+    save_controller(controller, optimizer, controller.name, controller_type)
+    file_path = os.path.join("Results", "Controller", controller_type, f"{controller.name}.csv")
 
+    write_headers = False
+
+    if not os.path.exists(file_path):
+        os.makedirs(file_path)
+        write_headers = True
+
+
+    with open(file_path, "a+") as file:
+        if write_headers:
+            file.write(",".join(headers))
+
+        file.write(",".join(row_data))
+
+
+def load_progress(name, controller_type="CNN"):
+    return pd.read_csv(os.path.join("Results", "Controller", controller_type, f"{name}.csv"))
         
