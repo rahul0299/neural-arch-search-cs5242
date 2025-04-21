@@ -4,7 +4,7 @@
 4. Does the controller adapt to different datasets. e.g. CIFAR has 3000 features, while MNIST has 700ish, does a model which has trained on CIFAR know that it could reduce the complexity and still work Merely providing image size may not be enough — what about number of classes, depth (channels), or variance in features?
 5. Transfer learning: Does a model trained on a CIFAR dataset able to reach a threshold accuracy faster on MNIST
 6. Transfer learning: Also if we provide training time as a metric, does it reduce the number of layers realizing that with MNIST it doesnt need as many layers
-
+7. Can Controller predict intermediate convolution layers of existing models?
 
 
 ![img.png](img.png)

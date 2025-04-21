@@ -5,7 +5,10 @@ import seaborn as sns
 import os
 import pandas as pd
 
-from requests.utils import default_headers
+from CNN_NAS.CNNController import CNNController
+
+import copy
+
 
 cmap = sns.diverging_palette(262, 10, sep=1, n=16, s=99, l=50, center="dark", as_cmap=True) # best
 
@@ -321,7 +324,39 @@ def check_cifar_dataset_exists(path_data='../../data/'):
     return path_data
 
 
-def save_controller(controller, optimizer, name, controller_type="CNN"):
+
+# positions : array of which positions of CNN layers to replace in the base layer
+# 0-indexed so [1] means replacing 2nd conv layer
+def replace_multiple_conv_layers(base_model, generated_layers, positions, input_channels=1):
+    encoding_copy = copy.deepcopy(base_model)
+    cnn_layers = encoding_copy[0]
+
+    conv_count = 0
+    gen_idx = 0
+    prev_out_channels = input_channels
+
+    for i in range(len(cnn_layers)):
+        layer = cnn_layers[i]
+
+        if len(layer) == 4:  # Conv2D layer
+            if conv_count in positions:
+                gen_layer = generated_layers[gen_idx]
+                out_channels = int(gen_layer[0])
+                kernel_size = int(gen_layer[1])
+                padding = int(gen_layer[2])
+
+                cnn_layers[i] = [prev_out_channels, out_channels, kernel_size, padding]
+                gen_idx += 1
+                if gen_idx >= len(generated_layers):
+                    break
+
+            prev_out_channels = layer[1]
+            conv_count += 1
+
+    return encoding_copy
+
+
+def save_controller(controller, optimizer, baseline, name, controller_type="CNN"):
     save_dir = os.path.join("Models", "Controller", controller_type)
     os.makedirs(save_dir, exist_ok=True)
 
@@ -329,41 +364,64 @@ def save_controller(controller, optimizer, name, controller_type="CNN"):
 
     torch.save({
         'model_state_dict': controller.state_dict(),
-        'optimizer_state_dict': optimizer.state_dict()
+        'optimizer_state_dict': optimizer.state_dict(),
+        'baseline': baseline
     }, path)
 
     print(f"Controller and optimizer saved to: {path}")
 
 
-def load_controller(controller, optimizer, name, controller_type="CNN"):
+def load_controller(name, controller_type="CNN"):
     path = os.path.join("Models", "Controller", controller_type, f"{name}.pt")
 
     checkpoint = torch.load(path)
+    controller = CNNController(name=name)
+    optimizer = torch.optim.Adam(controller.parameters(), lr=0.001)
     controller.load_state_dict(checkpoint['model_state_dict'])
     optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
-    controller.eval()
+    baseline = checkpoint['baseline']
 
     print(f"Controller and optimizer loaded from: {path}")
 
+    return controller, optimizer, baseline
 
-def save_progress(controller, optimizer, row_data, controller_type="CNN", headers=("train_loss", "test_loss", "train_acc", "test_acc", "train_time")):
-    save_controller(controller, optimizer, controller.name, controller_type)
-    file_path = os.path.join("Results", "Controller", controller_type, f"{controller.name}.csv")
 
-    write_headers = False
+def save_progress(controller, optimizer, baseline, row_data, controller_type="CNN",
+                  headers=("train_loss", "test_loss", "train_acc", "test_acc", "train_time")):
+    save_controller(controller, optimizer, baseline, controller.name, controller_type)
 
-    if not os.path.exists(file_path):
-        os.makedirs(file_path)
-        write_headers = True
+    dir_path = os.path.join("Results", "Controller", controller_type)
+    file_path = os.path.join(dir_path, f"{controller.name}.csv")
 
+    os.makedirs(dir_path, exist_ok=True)
+
+    write_headers = not os.path.isfile(file_path)
 
     with open(file_path, "a+") as file:
         if write_headers:
-            file.write(",".join(headers))
+            file.write(",".join(headers) + '\n')
 
-        file.write(",".join(row_data))
+        file.write(",".join(row_data) + '\n')
 
 
 def load_progress(name, controller_type="CNN"):
     return pd.read_csv(os.path.join("Results", "Controller", controller_type, f"{name}.csv"))
+
+
+def plot_accuracy(name, controller_type="CNN"):
+    df = load_progress(name, controller_type)
+    plt.plot(df["train_acc"])
+
+
+def reset_experiment(name, controller_type="CNN"):
+    model_file_path = os.path.join(os.path.join("Models", "Controller", controller_type, f"{name}.pt"))
+
+    result_file_path = os.path.join(os.path.join("Results", "Controller", controller_type, f"{name}.csv"))
+
+    if os.path.exists(model_file_path):
+        os.remove(model_file_path)
+
+    if os.path.exists(result_file_path):
+        os.remove(result_file_path)
+
         
