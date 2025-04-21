@@ -2,7 +2,7 @@ import torch.nn as nn
 import torch
 
 # Define search space
-FILTER_CHOICES = [16, 32, 64, 128]
+FILTER_CHOICES = [32, 64, 128, 256]
 KERNEL_CHOICES = [1, 3, 5]
 PADDING_CHOICES = [0, 1, 2]
 
