@@ -1,3 +1,5 @@
+import gc
+
 import torch
 import numpy as np
 import matplotlib.pyplot as plt
@@ -412,6 +414,39 @@ def plot_accuracy(name, controller_type="CNN"):
     df = load_progress(name, controller_type)
     plt.plot(df["train_acc"])
 
+def plot_metrics(name, controller_type="CNN"):
+    df = load_progress(name, controller_type)
+
+    fig, axs = plt.subplots(3, 1, figsize=(10, 12))
+    fig.suptitle(f"{controller_type} Controller Training Progress ({name})", fontsize=16)
+
+    # Plot 1: Accuracy
+    axs[0].plot(df["test_acc"], label="Test Accuracy", color='green')
+    axs[0].set_title("Test Accuracy")
+    axs[0].set_xlabel("Iteration")
+    axs[0].set_ylabel("Accuracy")
+    axs[0].grid(True)
+    axs[0].legend()
+
+    # Plot 2: Training Time
+    axs[1].plot(df["train_time"], label="Training Time (s)", color='orange')
+    axs[1].set_title("Training Time per Child Model")
+    axs[1].set_xlabel("Iteration")
+    axs[1].set_ylabel("Time (seconds)")
+    axs[1].grid(True)
+    axs[1].legend()
+
+    # Plot 3: Policy Gradient
+    axs[2].plot(df["policy_gradient"], label="Policy Gradient", color='blue')
+    axs[2].set_title("Policy Gradient Magnitude")
+    axs[2].set_xlabel("Iteration")
+    axs[2].set_ylabel("Gradient Value")
+    axs[2].grid(True)
+    axs[2].legend()
+
+    plt.tight_layout(rect=[0, 0, 1, 0.96])
+    plt.show()
+
 
 def reset_experiment(name, controller_type="CNN"):
     model_file_path = os.path.join(os.path.join("Models", "Controller", controller_type, f"{name}.pt"))
@@ -423,5 +458,22 @@ def reset_experiment(name, controller_type="CNN"):
 
     if os.path.exists(result_file_path):
         os.remove(result_file_path)
+
+
+def cleanup_child_model(child_model):
+    del child_model
+    if torch.backends.mps.is_available():
+        torch.mps.empty_cache()
+    elif torch.cuda.is_available():
+        torch.cuda.empty_cache()
+    gc.collect()
+
+def get_device_available():
+    if torch.backends.mps.is_available():
+        return torch.device("mps")
+    elif torch.cuda.is_available():
+        return torch.device("cuda")
+    else:
+        return torch.device("cpu")
 
         
