@@ -3,6 +3,8 @@ import torch.nn as nn
 
 import time
 
+import utils
+
 
 # Child model definition and functions
 class ChildCNNModel(nn.Module):
@@ -64,7 +66,16 @@ class ChildCNNModel(nn.Module):
 
         return nn.Sequential(*cnn_layers, *fc_layers)
 
-    def train_model(self, data, label, criterion, optimizer, device, epochs=10):
+    def train_model(self, data, label, criterion=None, optimizer=None, device=None, epochs=10):
+        if criterion is None:
+            criterion=nn.CrossEntropyLoss()
+
+        if optimizer is None:
+            optimizer = torch.optim.Adam(self.model.parameters(), lr=0.001)
+
+        if device is None:
+            device= utils.get_device_available()
+
         self.model.train()  # Set the model to training mode
         total_loss = 0  # Total loss of the model
         start_time = time.time()  # Start time of the training
@@ -116,8 +127,11 @@ class ChildCNNModel(nn.Module):
         elapsed_time = time.time() - start_time
         return total_loss, elapsed_time
 
-    def evaluate_model(self, data, labels, device):
+    def evaluate_model(self, data, labels, device=None):
         self.model.eval()
+
+        if device is None:
+            device= utils.get_device_available()
 
         bs = 200
         correct = 0
