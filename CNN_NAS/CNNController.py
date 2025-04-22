@@ -19,7 +19,7 @@ import torch
 import torch.nn as nn
 
 class CNNController(nn.Module):
-    def __init__(self, embedding_dim=8, hidden_dim=32, num_layers=1, name="CNN", meta=None, max_layers=10):
+    def __init__(self, embedding_dim=8, hidden_dim=32, num_layers=1, name="CNN", meta=None, max_layers=10, type="CNN"):
         super(CNNController, self).__init__()
 
         self.embedding = nn.Embedding(
@@ -44,6 +44,7 @@ class CNNController(nn.Module):
         self.num_layers = num_layers
         self.name = name
         self.max_layers = max_layers
+        self.type = type
 
         self.meta = torch.tensor([[0.0, 0.0]]) if meta is None else (
             meta if isinstance(meta, torch.Tensor) else torch.tensor([meta], dtype=torch.float)

@@ -370,14 +370,14 @@ def save_controller(controller, optimizer, baseline, name, controller_type="CNN"
         'baseline': baseline
     }, path)
 
-    print(f"Controller and optimizer saved to: {path}")
+    # print(f"Controller and optimizer saved to: {path}")
 
 
 def load_controller(name, controller_type="CNN"):
     path = os.path.join("Models", "Controller", controller_type, f"{name}.pt")
 
     checkpoint = torch.load(path)
-    controller = CNNController(name=name)
+    controller = CNNController(name=name, type=controller_type)
     optimizer = torch.optim.Adam(controller.parameters(), lr=0.001)
     controller.load_state_dict(checkpoint['model_state_dict'])
     optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
@@ -476,4 +476,15 @@ def get_device_available():
     else:
         return torch.device("cpu")
 
-        
+
+def save_child_model(child_model, accuracy, name, controller_type="CNN"):
+    save_dir = os.path.join("Models", "Child", controller_type)
+    os.makedirs(save_dir, exist_ok=True)
+
+    path = os.path.join(save_dir, f"{name}.pt")
+
+    torch.save({
+        'model_state_dict': child_model.state_dict(),
+        'accuracy': accuracy
+    }, path)
+

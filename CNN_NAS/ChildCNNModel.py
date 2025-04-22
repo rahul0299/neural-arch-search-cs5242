@@ -127,15 +127,20 @@ class ChildCNNModel(nn.Module):
         elapsed_time = time.time() - start_time
         return total_loss, elapsed_time
 
-    def evaluate_model(self, data, labels, device=None):
+    def evaluate_model(self, data, labels, criterion=None, device=None):
         self.model.eval()
 
         if device is None:
             device= utils.get_device_available()
 
+        if criterion is None:
+            criterion=nn.CrossEntropyLoss()
+
         bs = 200
         correct = 0
         total = 0
+
+        running_loss = 0
 
         with torch.no_grad():
             for i in range(0, data.size(0), bs):
@@ -153,4 +158,7 @@ class ChildCNNModel(nn.Module):
                 total += minibatch_labels.size(0)
                 correct += torch.sum(predicted == minibatch_labels).item()
 
-        return correct / total
+                loss = criterion(scores, minibatch_labels)
+                running_loss += loss.item() * minibatch_labels.size(0)
+
+        return correct / total, running_loss / total
