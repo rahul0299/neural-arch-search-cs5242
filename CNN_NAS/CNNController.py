@@ -15,18 +15,17 @@ IDX_TO_KERNEL = {idx: val for val, idx in KERNEL_VOCAB.items()}
 IDX_TO_PADDING = {idx: val for val, idx in PADDING_VOCAB.items()}
 
 
+import torch
+import torch.nn as nn
+
 class CNNController(nn.Module):
-    def __init__(self, embedding_dim=8, hidden_dim=32, num_layers=1, name="CNN", meta=None):
+    def __init__(self, embedding_dim=8, hidden_dim=32, num_layers=1, name="CNN", meta=None, max_layers=10):
         super(CNNController, self).__init__()
 
-        self.meta_layer = nn.Sequential(
-            nn.Linear(2, 64, bias=False),
-            nn.ReLU(),
-            nn.Linear(64, 2 * hidden_dim, bias=False)
+        self.embedding = nn.Embedding(
+            num_embeddings=len(FILTER_CHOICES) * len(KERNEL_CHOICES) * len(PADDING_CHOICES),
+            embedding_dim=embedding_dim
         )
-
-        self.vocab_size = len(FILTER_CHOICES) * len(KERNEL_CHOICES) * len(PADDING_CHOICES)
-        self.embedding = nn.Embedding(self.vocab_size, embedding_dim)
 
         self.rnn = nn.LSTM(embedding_dim, hidden_dim, num_layers, batch_first=True)
 
@@ -34,40 +33,61 @@ class CNNController(nn.Module):
         self.fc_kernel = nn.Linear(hidden_dim, len(KERNEL_CHOICES))
         self.fc_padding = nn.Linear(hidden_dim, len(PADDING_CHOICES))
 
+        self.meta_layer = nn.Sequential(
+            nn.Linear(2, 64, bias=False),
+            nn.ReLU(),
+            nn.Linear(64, 2 * hidden_dim, bias=False)
+        )
+
         self.hidden_dim = hidden_dim
+        self.embedding_dim = embedding_dim
         self.num_layers = num_layers
         self.name = name
+        self.max_layers = max_layers
 
-        if meta is None:
-            # default to [0, 0] if no metadata provided
-            self.meta = torch.tensor([[0.0, 0.0]])
-        else:
-            self.meta = meta if isinstance(meta, torch.Tensor) else torch.tensor([meta], dtype=torch.float)
+        self.meta = torch.tensor([[0.0, 0.0]]) if meta is None else (
+            meta if isinstance(meta, torch.Tensor) else torch.tensor([meta], dtype=torch.float)
+        )
 
+    def sinusoidal_encoding(self, pos, d_model):
+        """
+        Generate fixed sinusoidal positional encoding for a given position.
+        Returns: [1, 1, d_model] tensor
+        """
+        pe = torch.zeros(d_model)
+        position = torch.tensor(pos, dtype=torch.float32)
 
-    def forward(self, x, hidden=None):
+        for i in range(0, d_model, 2):
+            div_term = torch.tensor(10000.0 ** (i / d_model), dtype=torch.float32)
+            pe[i] = torch.sin(position / div_term)
+            if i + 1 < d_model:
+                pe[i + 1] = torch.cos(position / div_term)
+
+        return pe.view(1, 1, -1)  # [1, 1, d_model]
+
+    def forward(self, input_token, pos_idx, hidden=None):
+        # input_token: [1, 1], pos_idx: int or tensor
+
         if hidden is None:
-            if self.meta is not None:
-                meta_encoding = self.meta_layer(self.meta.to(x.device))
-                h_init = meta_encoding[:, :self.hidden_dim]
-                c_init = meta_encoding[:, self.hidden_dim:]
-                hidden = (
-                    h_init.view(1, 1, self.hidden_dim),
-                    c_init.view(1, 1, self.hidden_dim)
-                )
-            else:
-                # No metadata → use zeros (default behavior)
-                h_init = torch.zeros(1, 1, self.hidden_dim, device=x.device)
-                c_init = torch.zeros(1, 1, self.hidden_dim, device=x.device)
-                hidden = (h_init, c_init)
+            meta_encoding = self.meta_layer(self.meta.to(input_token.device))
+            h_init = meta_encoding[:, :self.hidden_dim]
+            c_init = meta_encoding[:, self.hidden_dim:]
+            hidden = (
+                h_init.view(self.num_layers, 1, self.hidden_dim),
+                c_init.view(self.num_layers, 1, self.hidden_dim)
+            )
 
-        x = self.embedding(x)
+        x = self.embedding(input_token)  # [1, 1, emb_dim]
+        pe = self.sinusoidal_encoding(pos_idx, x.size(-1)).to(x.device)  # [1, 1, emb_dim]
+        x = x + pe
+
         output, hidden = self.rnn(x, hidden)
+
         filter_logits = self.fc_filter(output)
         kernel_logits = self.fc_kernel(output)
         padding_logits = self.fc_padding(output)
-        return filter_logits, kernel_logits, padding_logits, hidden
 
+        return filter_logits, kernel_logits, padding_logits, hidden
 
     def generate_sequence(self, max_layers=1):
         self.eval()
@@ -77,13 +97,11 @@ class CNNController(nn.Module):
         K = len(KERNEL_CHOICES)
         P = len(PADDING_CHOICES)
 
-        # with torch.no_grad():
         input_token = torch.zeros(1, 1, dtype=torch.long)
         hidden = None
 
-        for _ in range(max_layers):
-            input_token = input_token.detach()
-            f_logits, k_logits, p_logits, hidden = self.forward(input_token, hidden)
+        for layer_idx in range(max_layers):
+            f_logits, k_logits, p_logits, hidden = self.forward(input_token, layer_idx, hidden)
 
             f_dist = torch.distributions.Categorical(logits=f_logits[:, -1, :])
             k_dist = torch.distributions.Categorical(logits=k_logits[:, -1, :])
@@ -103,11 +121,11 @@ class CNNController(nn.Module):
             sequence.append(layer)
             log_probs.append(log_prob)
 
+            # Prepare next input token
             combo_token = f_token * (K * P) + k_token * P + p_token
             input_token = combo_token.view(1, 1)
 
         return sequence, torch.stack(log_probs)
-
 
 
 
