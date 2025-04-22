@@ -1,6 +1,7 @@
 ## Next steps
 
 - Save highest accuracy child model
+- Update utils to download CIFAR-100
 - Clean up logging
 - Code clean up
 
@@ -25,12 +26,12 @@
 
 Train each predefined model for 
 
-### Exp 1
-### Exp 2
-### Exp 3
+### Exp 1 (R)
 
 Can a controller use dataset metadata information to converge faster or find better models
 
+> Aspect = Changing Controller input
+>
 > Model iters = 300
 > 
 > Train epochs = 30
@@ -49,11 +50,41 @@ Can a controller use dataset metadata information to converge faster or find bet
    3. policy gradient
 
 
-### Exp 4
+
+### Exp 2 (R)
+
+Can we modify reward function to consider both child model accuracy and model complexity
+
+> Aspect = changing Reward FN
+> 
+> Model iters = 300
+> 
+> Train epochs = 30
+
+
+
+1. Train controller on CIFAR-10 with different reward fn
+2. Save. Plot results
+   1. validation accuracy
+   2. validation loss
+   3. policy gradient
+3. Compare with pre-existing CIFAR-10 (Use from other exps)
+
+
+
+### Exp 3 ()
+
+
+Can we modify only activation functions
+
+
+### Exp 4 (V)
 
 Can a controller trained on different dataset converge faster towards a feasible model on a similar dataset
 
 #### Steps
+> Aspect = changing dataset
+> 
 > Model iters = 300
 > 
 > Train epochs = 30
@@ -75,3 +106,5 @@ Can a controller trained on different dataset converge faster towards a feasible
    1. validation accuracy
    2. validation loss
    3. policy gradient
+
+Check if pre-trained model reaches best accuracy in a stable fashion before fresh
