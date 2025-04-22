@@ -1,4 +1,5 @@
 import gc
+import random
 
 import torch
 import numpy as np
@@ -414,35 +415,37 @@ def plot_accuracy(name, controller_type="CNN"):
     df = load_progress(name, controller_type)
     plt.plot(df["train_acc"])
 
-def plot_metrics(name, controller_type="CNN"):
+def plot_metrics(name, controller_type="CNN", metrics=None, labels=None, titles=None, colors=None):
     df = load_progress(name, controller_type)
 
-    fig, axs = plt.subplots(3, 1, figsize=(10, 12))
+    if metrics is None:
+        metrics = df.columns
+    else:
+        for m in metrics:
+            if m not in df.columns:
+                raise ValueError(f"Metric '{m}' not found in progress data.")
+
+    if labels is None:
+        labels = { m: m for m in metrics }
+
+    if titles is None:
+        titles = { m: m.replace("_", " ").capitalize() for m in metrics }
+
+    if colors is None:
+        colors = {m: get_random_color_hex_code() for m in metrics}
+
+    fig, axs = plt.subplots(len(metrics), 1, figsize=(10, 4 * len(metrics)))
+
+    # fig, axs = plt.subplots(3, 1, figsize=(10, 12))
     fig.suptitle(f"{controller_type} Controller Training Progress ({name})", fontsize=16)
 
-    # Plot 1: Accuracy
-    axs[0].plot(df["test_acc"], label="Test Accuracy", color='green')
-    axs[0].set_title("Test Accuracy")
-    axs[0].set_xlabel("Iteration")
-    axs[0].set_ylabel("Accuracy")
-    axs[0].grid(True)
-    axs[0].legend()
-
-    # Plot 2: Training Time
-    axs[1].plot(df["train_time"], label="Training Time (s)", color='orange')
-    axs[1].set_title("Training Time per Child Model")
-    axs[1].set_xlabel("Iteration")
-    axs[1].set_ylabel("Time (seconds)")
-    axs[1].grid(True)
-    axs[1].legend()
-
-    # Plot 3: Policy Gradient
-    axs[2].plot(df["policy_gradient"], label="Policy Gradient", color='blue')
-    axs[2].set_title("Policy Gradient Magnitude")
-    axs[2].set_xlabel("Iteration")
-    axs[2].set_ylabel("Gradient Value")
-    axs[2].grid(True)
-    axs[2].legend()
+    for i, metric in enumerate(metrics):
+        axs[i].plot(df[metric], label=labels[metric], color=colors[metric])
+        axs[i].set_title(titles[metric])
+        axs[i].set_xlabel("Iteration")
+        axs[i].set_ylabel(metric)
+        axs[i].grid(True)
+        axs[i].legend()
 
     plt.tight_layout(rect=[0, 0, 1, 0.96])
     plt.show()
@@ -488,3 +491,6 @@ def save_child_model(child_model, accuracy, name, controller_type="CNN"):
         'accuracy': accuracy
     }, path)
 
+
+def get_random_color_hex_code():
+    return "#{:06x}".format(random.randint(0, 0xFFFFFF))
