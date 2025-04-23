@@ -337,6 +337,7 @@ def replace_multiple_conv_layers(base_model, generated_layers, positions, input_
     conv_count = 0
     gen_idx = 0
     prev_out_channels = input_channels
+    # print(f"Number of layers generated {len(generated_layers)}")
 
     for i in range(len(cnn_layers)):
         layer = cnn_layers[i]
@@ -353,7 +354,8 @@ def replace_multiple_conv_layers(base_model, generated_layers, positions, input_
                 if gen_idx >= len(generated_layers):
                     break
 
-            prev_out_channels = layer[1]
+            prev_out_channels = cnn_layers[i][1]
+            # print(f"prev out_channels {prev_out_channels}")
             conv_count += 1
 
     return encoding_copy

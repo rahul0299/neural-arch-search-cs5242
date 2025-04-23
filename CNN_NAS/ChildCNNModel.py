@@ -20,12 +20,12 @@ class ChildCNNModel(nn.Module):
     def forward(self, x):
         return self.model(x)
 
-    def build_cnn_model_from_encoding(self, le_net_encoding):
+    def build_cnn_model_from_encoding(self, model_encoding):
         cnn_layers = []
         c, h, w = self.input_channels, self.height, self.width
         convCount = 0
 
-        for layer in le_net_encoding[0]:
+        for layer in model_encoding[0]:
             if len(layer) == 4:
                 in_channels, out_channels, kernel_size, padding = layer
                 if convCount == 0:
@@ -49,7 +49,7 @@ class ChildCNNModel(nn.Module):
         cnn_layers.append(nn.Flatten())
 
         fc_layers = []
-        fc_encoding = le_net_encoding[1]
+        fc_encoding = model_encoding[1]
 
         # Replace the first layer's in_features with computed flattened_dim
         fc_layers.append(nn.Linear(flattened_dim, fc_encoding[0][1]))
