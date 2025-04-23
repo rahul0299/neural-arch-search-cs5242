@@ -25,3 +25,19 @@ Model VGG_11 Test Accuracy: (0.3502, 6.499268827438354) with total epochs 30 in 
 Model Alexnet Test Accuracy: (0.261, 3.0269012594223024) with total epochs 10 in dataset cifar100 for time 100.71197581291199
 Model Alexnet Test Accuracy: (0.2532, 4.176846704483032) with total epochs 20 in dataset cifar100 for time 201.94910550117493
 Model Alexnet Test Accuracy: (0.2463, 6.646781301498413) with total epochs 30 in dataset cifar100 for time 302.31578302383423
+
+
+
+With Fast Transform
+Model Benchmark_Model Train loss:2.1845599689483644 Test Accuracy: (0.4172, 2.213904900550842) with total epochs 10 in dataset cifar100 for time 42.063098192214966
+Model Benchmark_Model Train loss:1.773712342262268 Test Accuracy: (0.4573, 2.0759690284729) with total epochs 20 in dataset cifar100 for time 87.63536882400513
+Model Benchmark_Model Train loss:1.4437499294281007 Test Accuracy: (0.4992, 1.9812306833267213) with total epochs 30 in dataset cifar100 for time 122.79279208183289
+Model Lenet Train loss:2.223355405330658 Test Accuracy: (0.4326, 2.169964189529419) with total epochs 10 in dataset cifar100 for time 36.83628702163696
+Model Lenet Train loss:2.033340596199036 Test Accuracy: (0.4566, 2.0728359818458557) with total epochs 20 in dataset cifar100 for time 78.29097247123718
+Model Lenet Train loss:1.81845245885849 Test Accuracy: (0.4967, 1.8957668042182922) with total epochs 30 in dataset cifar100 for time 115.1853141784668
+Model VGG_11 Train loss:2.18240100812912 Test Accuracy: (0.4114, 2.200830013751984) with total epochs 10 in dataset cifar100 for time 57.88082790374756
+Model VGG_11 Train loss:1.6457232022285462 Test Accuracy: (0.4686, 2.0640684962272644) with total epochs 20 in dataset cifar100 for time 116.19902634620667
+Model VGG_11 Train loss:1.062280374288559 Test Accuracy: (0.475, 2.327038106918335) with total epochs 30 in dataset cifar100 for time 172.84951758384705
+Model Alexnet Train loss:2.878511745452881 Test Accuracy: (0.281, 2.8395234632492063) with total epochs 10 in dataset cifar100 for time 100.69849300384521
+Model Alexnet Train loss:2.569091649055481 Test Accuracy: (0.3173, 2.6941484355926515) with total epochs 20 in dataset cifar100 for time 201.27524089813232
+Model Alexnet Train loss:1.9847087931632996 Test Accuracy: (0.3677, 2.6420201683044433) with total epochs 30 in dataset cifar100 for time 301.43654894828796

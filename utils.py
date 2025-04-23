@@ -503,8 +503,9 @@ def reset_experiment(name, controller_type="CNN"):
         os.remove(result_file_path)
 
 
-def cleanup_child_model(child_model):
-    del child_model
+def cleanup_child_model(child_model=None):
+    if child_model is not None:
+        del child_model
     if torch.backends.mps.is_available():
         torch.mps.empty_cache()
     elif torch.cuda.is_available():
