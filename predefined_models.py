@@ -2,9 +2,9 @@ def get_benchmarkModel(input_channels, output_dim):
     return   [
     [
         #Conv(input_channels,output_channels,kernel_size,padding), Maxpool(Kernel_size,Stride)
-        [input_channels, 256, 3, 1], [2, 2],
-        [256, 128, 3, 1], [2, 2],
+        [input_channels, 128, 3, 1], [2, 2],
         [128, 64, 3, 1], [2, 2],
+        [64, 32, 3, 1], [2, 2],
     ],
     [
         # MLP layers
