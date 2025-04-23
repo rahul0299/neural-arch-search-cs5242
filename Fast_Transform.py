@@ -70,7 +70,7 @@ def get_dataset_stats(dataset_name):
     if dataset_name == "cifar100":
         mean = (0.5071, 0.4865, 0.4409)
         std = (0.2673, 0.2564, 0.2761)
-    elif dataset_name == "cifar10":
+    elif dataset_name == "cifar":
         mean = (0.4914, 0.4822, 0.4465)
         std = (0.2023, 0.1994, 0.2010)
     elif dataset_name == "imagenet":
