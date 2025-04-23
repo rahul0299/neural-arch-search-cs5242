@@ -327,6 +327,44 @@ def check_cifar_dataset_exists(path_data='../../data/'):
     return path_data
 
 
+def check_cifar100_dataset_exists(path_data='../../data/'):
+    flag_train_data = os.path.isfile(path_data + 'cifar100/train_data.pt')
+    flag_train_label = os.path.isfile(path_data + 'cifar100/train_label.pt')
+    flag_test_data = os.path.isfile(path_data + 'cifar100/test_data.pt')
+    flag_test_label = os.path.isfile(path_data + 'cifar100/test_label.pt')
+
+    if not (flag_train_data and flag_train_label and flag_test_data and flag_test_label):
+        print('CIFAR-100 dataset missing - downloading...')
+        import torchvision
+        import torchvision.transforms as transforms
+
+        trainset = torchvision.datasets.CIFAR100(
+            root=path_data + 'cifar100/temp', train=True,
+            download=True, transform=transforms.ToTensor())
+        testset = torchvision.datasets.CIFAR100(
+            root=path_data + 'cifar100/temp', train=False,
+            download=True, transform=transforms.ToTensor())
+
+        train_data = torch.Tensor(50000, 3, 32, 32)
+        train_label = torch.LongTensor(50000)
+        for idx, (img, label) in enumerate(trainset):
+            train_data[idx] = img
+            train_label[idx] = label
+        torch.save(train_data, path_data + 'cifar100/train_data.pt')
+        torch.save(train_label, path_data + 'cifar100/train_label.pt')
+
+        test_data = torch.Tensor(10000, 3, 32, 32)
+        test_label = torch.LongTensor(10000)
+        for idx, (img, label) in enumerate(testset):
+            test_data[idx] = img
+            test_label[idx] = label
+        torch.save(test_data, path_data + 'cifar100/test_data.pt')
+        torch.save(test_label, path_data + 'cifar100/test_label.pt')
+
+    return path_data
+
+
+
 
 # positions : array of which positions of CNN layers to replace in the base layer
 # 0-indexed so [1] means replacing 2nd conv layer
@@ -465,8 +503,9 @@ def reset_experiment(name, controller_type="CNN"):
         os.remove(result_file_path)
 
 
-def cleanup_child_model(child_model):
-    del child_model
+def cleanup_child_model(child_model=None):
+    if child_model is not None:
+        del child_model
     if torch.backends.mps.is_available():
         torch.mps.empty_cache()
     elif torch.cuda.is_available():
