@@ -8,9 +8,9 @@ def get_benchmarkModel(input_channels, output_dim):
     ],
     [
         # MLP layers
-        [4900, 4096],
-        [4096, 1024],
-        [1024, output_dim]
+        [1024, 512],
+        [512, 256],
+        [256, output_dim]
     ]
 ]
 
