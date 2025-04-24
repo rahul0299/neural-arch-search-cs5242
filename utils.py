@@ -496,11 +496,16 @@ def reset_experiment(name, controller_type="CNN"):
 
     result_file_path = os.path.join(os.path.join("Results", "Controller", controller_type, f"{name}.csv"))
 
+    child_file_path = os.path.join(os.path.join("Models", "Child", controller_type, f"{name}.pt"))
+
     if os.path.exists(model_file_path):
         os.remove(model_file_path)
 
     if os.path.exists(result_file_path):
         os.remove(result_file_path)
+
+    if os.path.exists(child_file_path):
+        os.remove(child_file_path)
 
 
 def cleanup_child_model(child_model=None):
