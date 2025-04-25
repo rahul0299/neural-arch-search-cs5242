@@ -483,7 +483,7 @@ def plot_metrics(name, controller_type="CNN", metrics=None, labels=None, titles=
     fig.suptitle(f"{controller_type} Controller Training Progress ({name})", fontsize=16)
 
     for i, metric in enumerate(metrics):
-        axs[i].plot(df[metric], label=labels[metric], color=colors[metric])
+        axs[i].plot(df[metric], label=labels[metric], color=colors[metric] if metric in colors else get_random_color_hex_code())
         axs[i].set_title(titles[metric])
         axs[i].set_xlabel("Iteration")
         axs[i].set_ylabel(metric)

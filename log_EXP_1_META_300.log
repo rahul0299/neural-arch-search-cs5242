@@ -3,56 +3,6 @@ INFO:__main__:STARTING TRAINING
 INFO:__main__:###############################################
 INFO:__main__:Training set shape: torch.Size([50000, 3, 32, 32])
 INFO:__main__:------ ITERATION 0 ------
-INFO:__main__:Layers generated: [('32', '3', '1'), ('32', '1', '0')]
-INFO:__main__:ChildCNNModel(
-  (model): Sequential(
-    (0): Conv2d(3, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
-    (1): ReLU()
-    (2): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
-    (3): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
-    (4): ReLU()
-    (5): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
-    (6): Conv2d(32, 32, kernel_size=(1, 1), stride=(1, 1))
-    (7): ReLU()
-    (8): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
-    (9): Flatten(start_dim=1, end_dim=-1)
-    (10): Linear(in_features=512, out_features=512, bias=True)
-    (11): ReLU()
-    (12): Linear(in_features=512, out_features=256, bias=True)
-    (13): ReLU()
-    (14): Linear(in_features=256, out_features=10, bias=True)
-  )
-)
-INFO:__main__:###############################################
-INFO:__main__:STARTING TRAINING
-INFO:__main__:###############################################
-INFO:__main__:Training set shape: torch.Size([50000, 3, 32, 32])
-INFO:__main__:------ ITERATION 0 ------
-INFO:__main__:Layers generated: [('256', '3', '1'), ('32', '1', '2')]
-INFO:__main__:ChildCNNModel(
-  (model): Sequential(
-    (0): Conv2d(3, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
-    (1): ReLU()
-    (2): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
-    (3): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
-    (4): ReLU()
-    (5): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
-    (6): Conv2d(256, 32, kernel_size=(1, 1), stride=(1, 1), padding=(2, 2))
-    (7): ReLU()
-    (8): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
-    (9): Flatten(start_dim=1, end_dim=-1)
-    (10): Linear(in_features=1152, out_features=512, bias=True)
-    (11): ReLU()
-    (12): Linear(in_features=512, out_features=256, bias=True)
-    (13): ReLU()
-    (14): Linear(in_features=256, out_features=10, bias=True)
-  )
-)
-INFO:__main__:###############################################
-INFO:__main__:STARTING TRAINING
-INFO:__main__:###############################################
-INFO:__main__:Training set shape: torch.Size([50000, 3, 32, 32])
-INFO:__main__:------ ITERATION 0 ------
 INFO:__main__:Layers generated: [('64', '1', '0'), ('256', '5', '0')]
 INFO:__main__:ChildCNNModel(
   (model): Sequential(
