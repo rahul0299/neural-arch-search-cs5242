@@ -1,69 +1,71 @@
 import re
+import csv
 
-def extract_conv_params_from_log(file_path):
-    results = []
-    with open(file_path, 'r') as f:
-        lines = f.readlines()
+# === CONFIGURATION ===
+LOG_PATH = "Sample_Log.log"
+CSV_OUTPUT_PATH = "final_conv_layer_params.csv"
 
-    inside_model = False
-    conv_layers = []
-    model_index = -1
+def count_conv2d_params(in_ch, out_ch, kh, kw, bias=True):
+    return in_ch * out_ch * kh * kw + (out_ch if bias else 0)
 
-    for line in lines:
+results = []
+inside_model = False
+iteration = -1
+conv_layers = []
+
+with open(LOG_PATH, 'r') as f:
+    for line in f:
         line = line.strip()
 
-        # Detect start of a new model block
+        if "------ ITERATION" in line:
+            iteration = int(re.search(r"ITERATION (\d+)", line).group(1))
+
         if "ChildCNNModel(" in line:
             inside_model = True
             conv_layers = []
-            model_index += 1
             continue
 
         if inside_model:
-            # End of model block
-            if line == ")":
+            if "Conv2d" in line:
+                # Match with optional padding
+                match = re.search(
+                    r"Conv2d\((\d+), (\d+), kernel_size=\((\d+), (\d+)\)(?:, stride=\([^)]+\))?(?:, padding=\((\d+), (\d+)\))?",
+                    line
+                )
+                if match:
+                    in_ch, out_ch, kh, kw, pad_h, pad_w = match.groups()
+                    pad_h = int(pad_h) if pad_h is not None else 0
+                    pad_w = int(pad_w) if pad_w is not None else 0
+                    conv_layers.append((int(in_ch), int(out_ch), int(kh), int(kw), pad_h))
+
+            elif line == ")":
                 inside_model = False
                 if len(conv_layers) >= 3:
-                    # Extract parameters from 2nd and 3rd Conv2d layers
-                    def count_params(in_ch, out_ch, kh, kw, bias=True):
-                        return in_ch * out_ch * kh * kw + (out_ch if bias else 0)
+                    row = {"iteration": iteration}
+                    total = 0
+                    for i in range(3):
+                        in_c, out_c, kh, kw, pad = conv_layers[i]
+                        param_count = count_conv2d_params(in_c, out_c, kh, kw)
+                        row[f"layer_{i+1}_channels"] = out_c
+                        row[f"layer_{i+1}_filter"] = kh
+                        row[f"layer_{i+1}_padding"] = pad
+                        row[f"layer_{i+1}_param_count"] = param_count
+                        total += param_count
+                    row["total_param_count"] = total
+                    results.append(row)
 
-                    in2, out2, kh2, kw2 = conv_layers[1]
-                    in3, out3, kh3, kw3 = conv_layers[2]
+# CSV Output
+fieldnames = [
+    "iteration",
+    "layer_1_channels", "layer_1_filter", "layer_1_padding", "layer_1_param_count",
+    "layer_2_channels", "layer_2_filter", "layer_2_padding", "layer_2_param_count",
+    "layer_3_channels", "layer_3_filter", "layer_3_padding", "layer_3_param_count",
+    "total_param_count"
+]
 
-                    conv2_params = count_params(in2, out2, kh2, kw2)
-                    conv3_params = count_params(in3, out3, kh3, kw3)
-
-                    results.append({
-                        'iteration': model_index,
-                        'conv2_params': conv2_params,
-                        'conv3_params': conv3_params,
-                        'total_params': conv2_params + conv3_params
-                    })
-                continue
-
-            # Parse Conv2d lines regardless of prefix
-            if "Conv2d" in line:
-                match = re.search(r"Conv2d\((\d+), (\d+), kernel_size=\((\d+), (\d+)\)", line)
-                if match:
-                    conv_layers.append(tuple(map(int, match.groups())))
-
-    return results
-
-# Run the script
-results = extract_conv_params_from_log("Sample_Log.log")
-
-# Print results
-for r in results:
-    print(f"Iteration {r['iteration']}: Conv2 Params = {r['conv2_params']}, "
-          f"Conv3 Params = {r['conv3_params']}, Total = {r['total_params']}")
-
-import csv
-
-# Save results to CSV
-with open("conv2_conv3_params.csv", mode="w", newline='') as file:
-    writer = csv.DictWriter(file, fieldnames=["iteration", "conv2_params", "conv3_params", "total_params"])
+with open(CSV_OUTPUT_PATH, "w", newline="") as csvfile:
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
     writer.writeheader()
     writer.writerows(results)
 
-print("✅ Exported to conv2_conv3_params.csv")
+print(f"✅ Fixed padding captured and exported {len(results)} models to {CSV_OUTPUT_PATH}")
