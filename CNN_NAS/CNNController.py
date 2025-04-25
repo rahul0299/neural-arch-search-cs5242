@@ -127,11 +127,3 @@ class CNNController(nn.Module):
             input_token = combo_token.view(1, 1)
 
         return sequence, torch.stack(log_probs)
-
-
-
-# Initialize the model
-model = CNNController(meta=torch.Tensor([[32, 10]]))
-print(model.generate_sequence(max_layers=5))  # Example output
-print(model)
-del model
