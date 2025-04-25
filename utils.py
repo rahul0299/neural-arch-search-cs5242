@@ -455,8 +455,11 @@ def plot_accuracy(name, controller_type="CNN"):
     df = load_progress(name, controller_type)
     plt.plot(df["train_acc"])
 
-def plot_metrics(name, controller_type="CNN", metrics=None, labels=None, titles=None, colors=None):
+def plot_metrics(name, controller_type="CNN", metrics=None, labels=None, titles=None, colors=None,limit=None):
     df = load_progress(name, controller_type)
+
+    if limit is not None:
+        df = df.head(limit)
 
     if metrics is None:
         metrics = df.columns
