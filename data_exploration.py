@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from collections import Counter
 import random
 import math
+from Fast_Transform import get_fast_transform
 
 def explore_dataset(dataset="cifar", data_path="../../data/"):
 
@@ -78,5 +79,48 @@ def explore_dataset(dataset="cifar", data_path="../../data/"):
     plt.show()
 
 
+    plt.tight_layout()
+    plt.show()
+
+
+
+
+
+def get_random_augmented_image(dataset="cifar", data_path="../../data/"):
+    if dataset == "cifar":
+        data_path = utils.check_cifar_dataset_exists(data_path)
+    elif dataset == "mnist":
+        data_path = utils.check_mnist_dataset_exists(data_path)
+    elif dataset == "cifar100":
+        data_path = utils.check_cifar100_dataset_exists(data_path)
+
+    train_x = torch.load(data_path + f'{dataset}/train_data.pt', weights_only=True)
+
+    num_channels = train_x.size(1) if train_x.ndim == 4 else 1
+
+    transform = get_fast_transform(dataset)
+    plt.figure(figsize=(6, 3))
+    idx = random.randint(0, len(train_x) - 1)
+    orig = train_x[idx]
+    if orig.max().item() > 1:
+        orig = orig.float() / 255.0
+    aug = transform(orig)
+
+    mean = transform.mean.to(aug.device)
+    std = transform.std.to(aug.device)
+    aug_unnorm = aug * std + mean
+    aug_unnorm = torch.clamp(aug_unnorm, 0, 1)
+
+    plt.subplot(1, 2, 1)
+    plt.imshow(orig.permute(1, 2, 0) if num_channels > 1 else orig.squeeze(0), cmap="gray")
+    plt.title("Original")
+    plt.axis("off")
+
+    plt.subplot(1, 2, 2)
+    plt.imshow(aug_unnorm.permute(1, 2, 0) if num_channels > 1 else aug.squeeze(0), cmap="gray")
+    plt.title("Augmented")
+    plt.axis("off")
+
+    plt.suptitle("Augmentation Preview")
     plt.tight_layout()
     plt.show()
