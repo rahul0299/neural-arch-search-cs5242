@@ -12,6 +12,7 @@ from CNN_NAS.CNNController import CNNController
 
 import copy
 
+from CNN_NAS.ChildCNNModel import ChildCNNModel
 
 cmap = sns.diverging_palette(262, 10, sep=1, n=16, s=99, l=50, center="dark", as_cmap=True) # best
 
@@ -427,6 +428,15 @@ def load_controller(name, controller_type="CNN"):
     print(f"Controller and optimizer loaded from: {path}")
 
     return controller, optimizer, baseline
+
+def load_child_model(name,model_type="CNN"):
+    path = os.path.join("Models", "Child","CNN", f"{name}")
+    model = torch.load(path)
+    # print(model)
+
+    return model
+
+
 
 
 def save_progress(controller, optimizer, baseline, row_data, controller_type="CNN",

@@ -60,3 +60,57 @@ Model Alexnet Train loss:1.9847087931632996 Test Accuracy: (0.3677, 2.6420201683
 
 
 
+[[[3, 128, 3, 1], [2, 2], [128, 256, 3, 1], [2, 2], [256, 256, 3, 2], [2, 2]], [[1024, 512], [512, 256], [256, 100]]]
+Height: 32
+Width: 32
+Number of channels: 3
+Number of classes:  100
+Done cleaning
+Model EXP4_CIFAR_100_Fresh Train loss:1.7701446747779845 Test Accuracy: (0.4791, 1.9529373526573182) with total epochs 10 in dataset cifar100 for time 62.75744390487671
+Model EXP4_CIFAR_100_Fresh Train loss:1.3455403819084168 Test Accuracy: (0.5229, 1.8809332823753357) with total epochs 20 in dataset cifar100 for time 124.47222971916199
+Model EXP4_CIFAR_100_Fresh Train loss:0.9920755751132965 Test Accuracy: (0.5317, 2.0268278193473814) with total epochs 30 in dataset cifar100 for time 185.21024346351624
+[[[3, 128, 3, 1], [2, 2], [128, 256, 1, 2], [2, 2], [256, 256, 5, 2], [2, 2]], [[1024, 512], [512, 256], [256, 100]]]
+Height: 32
+Width: 32
+Number of channels: 3
+Number of classes:  100
+Done cleaning
+Model EXP4_CIFAR_100_Pre_Trained Train loss:1.7827405667304992 Test Accuracy: (0.4981, 1.8795483469963075) with total epochs 10 in dataset cifar100 for time 75.83925890922546
+Model EXP4_CIFAR_100_Pre_Trained Train loss:1.4138039054870606 Test Accuracy: (0.5136, 1.875851788520813) with total epochs 20 in dataset cifar100 for time 152.40657663345337
+Model EXP4_CIFAR_100_Pre_Trained Train loss:1.0657305116653442 Test Accuracy: (0.5299, 1.9420390772819518) with total epochs 30 in dataset cifar100 for time 227.7476122379303
+[[[3, 128, 3, 1], [2, 2], [128, 256, 3, 0], [2, 2], [256, 256, 5, 1], [2, 2]], [[1024, 512], [512, 256], [256, 10]]]
+Height: 32
+Width: 32
+Number of channels: 3
+Number of classes:  10
+Done cleaning
+Model EXP_1_CIFAR10_META Train loss:0.5996816958189011 Test Accuracy: (0.7938, 0.5973519521951676) with total epochs 10 in dataset cifar for time 53.260048151016235
+Model EXP_1_CIFAR10_META Train loss:0.39114350295066835 Test Accuracy: (0.8223, 0.5507712733745574) with total epochs 20 in dataset cifar for time 106.36775374412537
+Model EXP_1_CIFAR10_META Train loss:0.30873701864480974 Test Accuracy: (0.8409, 0.5186609834432602) with total epochs 30 in dataset cifar for time 159.48331022262573
+[[[3, 128, 3, 1], [2, 2], [128, 256, 1, 0], [2, 2], [256, 256, 3, 2], [2, 2]], [[1024, 512], [512, 256], [256, 10]]]
+Height: 32
+Width: 32
+Number of channels: 3
+Number of classes:  10
+Done cleaning
+Model EXP_1_CIFAR10_NO_META Train loss:0.514252149939537 Test Accuracy: (0.8164, 0.5394176656007766) with total epochs 10 in dataset cifar for time 50.25537419319153
+Model EXP_1_CIFAR10_NO_META Train loss:0.32557210290431976 Test Accuracy: (0.833, 0.5109535783529282) with total epochs 20 in dataset cifar for time 100.51516723632812
+Model EXP_1_CIFAR10_NO_META Train loss:0.26785784244537353 Test Accuracy: (0.843, 0.5393790328502654) with total epochs 30 in dataset cifar for time 150.82849407196045
+[[[3, 32, 5, 1], [2, 2], [32, 16, 3, 2], [2, 2], [16, 32, 3, 1], [2, 2]], [[1024, 512], [512, 256], [256, 10]]]
+Height: 32
+Width: 32
+Number of channels: 3
+Number of classes:  10
+Done cleaning
+Model Exp_5_3_Layer_CIFAR_10 Train loss:0.830632159948349 Test Accuracy: (0.7371, 0.7517644703388214) with total epochs 10 in dataset cifar for time 34.575576305389404
+Model Exp_5_3_Layer_CIFAR_10 Train loss:0.6622399731874465 Test Accuracy: (0.7631, 0.6750797951221466) with total epochs 20 in dataset cifar for time 66.64635848999023
+Model Exp_5_3_Layer_CIFAR_10 Train loss:0.5673358318805695 Test Accuracy: (0.7867, 0.6354553782939911) with total epochs 30 in dataset cifar for time 88.35884308815002
+[[[3, 128, 3, 1], [2, 2], [128, 64, 3, 1], [2, 2], [64, 256, 3, 2], [2, 2]], [[1024, 512], [512, 256], [256, 10]]]
+Height: 32
+Width: 32
+Number of channels: 3
+Number of classes:  10
+Done cleaning
+Model EXP_6_CIFAR10 Train loss:0.5794731656312943 Test Accuracy: (0.7929, 0.6121923130750656) with total epochs 10 in dataset cifar for time 39.49993109703064
+Model EXP_6_CIFAR10 Train loss:0.35369511103630064 Test Accuracy: (0.8317, 0.5458761811256408) with total epochs 20 in dataset cifar for time 78.17748355865479
+Model EXP_6_CIFAR10 Train loss:0.34186198335886003 Test Accuracy: (0.8233, 0.5519047206640244) with total epochs 30 in dataset cifar for time 117.74566698074341
