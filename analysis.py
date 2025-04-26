@@ -127,7 +127,8 @@ def plot_metrics(df, experiment_name, metrics=None, labels=None, titles=None, co
         #     ]
         # }
 
-        if metric in references:
+
+        if references is not None and metric in references:
             for ref in references[metric]:
                 axs[i].axhline(ref["value"], color=ref["color"] if "color" in ref else get_random_color_hex_code(), linestyle='--', label=ref["label"])
 
