@@ -4,8 +4,6 @@ import random
 
 import utils
 
-
-# CIFAR-100
 class FastTensorAugment:
     def __init__(self, crop_size=32, padding=4, hflip_prob=0.5,
                  mean=(0.5071, 0.4865, 0.4409), std=(0.2673, 0.2564, 0.2761)):
@@ -16,11 +14,14 @@ class FastTensorAugment:
         self.std = torch.tensor(std).view(3, 1, 1)
 
     def __call__(self, img):
+        # Reflection padding
         img = F.pad(img, pad=[self.padding] * 4, mode='reflect')
         top = random.randint(0, img.size(1) - self.crop_size)
         left = random.randint(0, img.size(2) - self.crop_size)
+        # Random crop based on probability
         img = img[:, top:top + self.crop_size, left:left + self.crop_size]
 
+        # Flipping image based on probability
         if random.random() < self.hflip_prob:
             img = torch.flip(img, dims=[2])
 
@@ -36,10 +37,7 @@ def get_fast_transform(dataset_name):
     mean, std = get_dataset_stats(dataset_name)
 
     # Recommended crop/pad per dataset
-    if dataset_name.lower() == "imagenet":
-        crop_size = 224
-        padding = 32
-    elif dataset_name.lower() == "mnist":
+    if dataset_name.lower() == "mnist":
         crop_size = 28
         padding = 2
     else: #CIFAR,CIFAR100
@@ -67,15 +65,13 @@ def normalize_eval_tensor(tensor, dataset_name, device=None):
 def get_dataset_stats(dataset_name):
     dataset_name = dataset_name.lower()
 
+    # Pre-computed mean and std of each dataset's images
     if dataset_name == "cifar100":
         mean = (0.5071, 0.4865, 0.4409)
         std = (0.2673, 0.2564, 0.2761)
     elif dataset_name == "cifar":
         mean = (0.4914, 0.4822, 0.4465)
         std = (0.2023, 0.1994, 0.2010)
-    elif dataset_name == "imagenet":
-        mean = (0.485, 0.456, 0.406)
-        std = (0.229, 0.224, 0.225)
     elif dataset_name == "mnist":
         mean = (0.1307,)
         std = (0.3081,)
