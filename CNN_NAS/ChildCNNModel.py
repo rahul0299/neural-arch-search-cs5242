@@ -6,7 +6,7 @@ import time
 import utils
 
 from Fast_Transform import get_fast_transform,normalize_eval_tensor
-# from Kornia_Transform import get_kornia_transform,normalize_eval_tensor
+
 
 
 # Child model definition and functions
@@ -188,78 +188,3 @@ class ChildCNNModel(nn.Module):
                 running_loss += loss.item() * minibatch_labels.size(0)
 
         return correct / total, running_loss / total
-
-
-    #
-    # def loader_train_model(self, dataloader, criterion=None, optimizer=None, device=None, epochs=10):
-    #     import time
-    #     import torch
-    #
-    #     if criterion is None:
-    #         criterion = nn.CrossEntropyLoss()
-    #     if optimizer is None:
-    #         optimizer = torch.optim.Adam(self.model.parameters(), lr=0.001)
-    #     if device is None:
-    #         device = utils.get_device_available()
-    #
-    #     self.model.train()
-    #     self.model.to(device)
-    #
-    #     start_time = time.time()
-    #
-    #     for epoch in range(epochs):
-    #         running_loss = 0.0
-    #         batch_times = []
-    #         num_batches = 0
-    #
-    #         for inputs, labels in dataloader:
-    #             # t0 = time.time()  # batch start time
-    #
-    #             inputs = inputs.to(device, non_blocking=True)
-    #             labels = labels.to(device, non_blocking=True)
-    #
-    #             optimizer.zero_grad()
-    #             outputs = self.model(inputs)
-    #             loss = criterion(outputs, labels)
-    #             running_loss += loss.detach().item()
-    #             loss.backward()
-    #             optimizer.step()
-    #
-    #             # batch_time = time.time() - t0
-    #             # batch_times.append(batch_time)
-    #
-    #             num_batches += 1
-    #
-    #         # avg_batch_time = sum(batch_times) / len(batch_times)
-    #         # print(
-    #         #     f"[Epoch {epoch + 1}] Loss: {running_loss / num_batches:.4f} | Avg Batch Time: {avg_batch_time:.4f}s | GPU Usage: {torch.cuda.memory_allocated(device) / 1e6:.2f} MB")
-    #
-    #     elapsed_time = time.time() - start_time
-    #     return running_loss / num_batches, elapsed_time
-    #
-    # def loader_evaluate_model(self, dataloader, criterion=None, device=None):
-    #     if criterion is None:
-    #         criterion = nn.CrossEntropyLoss()
-    #     if device is None:
-    #         device = utils.get_device_available()
-    #
-    #     self.model.eval()
-    #     self.model.to(device)
-    #
-    #     correct = 0
-    #     total = 0
-    #     running_loss = 0
-    #
-    #     with torch.no_grad():
-    #         for inputs, labels in dataloader:
-    #             inputs, labels = inputs.to(device), labels.to(device)
-    #
-    #             outputs = self.model(inputs)
-    #             loss = criterion(outputs, labels)
-    #             running_loss += loss.item() * labels.size(0)
-    #
-    #             preds = outputs.argmax(dim=1)
-    #             correct += (preds == labels).sum().item()
-    #             total += labels.size(0)
-    #
-    #     return correct / total, running_loss / total
