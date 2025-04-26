@@ -61,11 +61,13 @@ def plot_token_distribution(df, experiment_name, include_layer1=True, use_sns=Fa
     plt.show()
 
 
-def compute_stats(df, step=50, metrics=None, stats=None):
+def compute_stats(df, step=50, metrics=None, stats=None,limit=None):
     if metrics is None:
         metrics = df.columns.tolist()
     if stats is None:
         stats = ['mean', 'std', 'min', '25%', '50%', '75%', 'max']
+    if limit is not None:
+        df = df.head(limit)
 
     df = df.copy()
     df["row_index"] = df.index
