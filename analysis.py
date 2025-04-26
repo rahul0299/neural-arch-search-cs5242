@@ -83,7 +83,7 @@ def get_random_color_hex_code():
     return "#{:06x}".format(random.randint(0, 0xFFFFFF))
 
 
-def plot_metrics(df, experiment_name, metrics=None, labels=None, titles=None, colors=None,limit=None):
+def plot_metrics(df, experiment_name, metrics=None, labels=None, titles=None, colors=None, limit=None, references=None):
     if limit is not None:
         df = df.head(limit)
 
@@ -110,6 +110,27 @@ def plot_metrics(df, experiment_name, metrics=None, labels=None, titles=None, co
 
     for i, metric in enumerate(metrics):
         axs[i].plot(df[metric], label=labels[metric], color=colors[metric] if metric in colors else get_random_color_hex_code())
+
+
+        # SAMPLE REFERENCE
+        # references = {
+        #     "test_acc": [
+        #         {
+        #             "value": 0.7765,
+        #             "label": "LeNet",
+        #             "color": "tab:blue"
+        #         },
+        #         {
+        #             "value": 0.8125,
+        #             "label": "VGG11"
+        #         }
+        #     ]
+        # }
+
+        if metric in references:
+            for ref in references[metric]:
+                axs[i].axhline(ref["value"], color=ref["color"] if "color" in ref else get_random_color_hex_code(), linestyle='--', label=ref["label"])
+
         axs[i].set_title(titles[metric])
         axs[i].set_xlabel("Iteration")
         axs[i].set_ylabel(metric)
