@@ -6,7 +6,7 @@ import random
 import math
 from Fast_Transform import get_fast_transform
 
-def explore_dataset(dataset="cifar", data_path="../../data/"):
+def explore_dataset(dataset="cifar", data_path="./data/"):
 
     if dataset == "cifar":
         data_path = utils.check_cifar_dataset_exists(data_path)
@@ -86,7 +86,7 @@ def explore_dataset(dataset="cifar", data_path="../../data/"):
 
 
 
-def get_random_augmented_image(dataset="cifar", data_path="../../data/"):
+def get_random_augmented_image(dataset="cifar", data_path="./data/"):
     if dataset == "cifar":
         data_path = utils.check_cifar_dataset_exists(data_path)
     elif dataset == "mnist":

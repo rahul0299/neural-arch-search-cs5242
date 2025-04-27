@@ -238,7 +238,7 @@ def show_template_rgb_together(X):
 
     
 import os.path
-def check_mnist_dataset_exists(path_data='../../data/'):
+def check_mnist_dataset_exists(path_data='./data/'):
     flag_train_data = os.path.isfile(path_data + 'mnist/train_data.pt') 
     flag_train_label = os.path.isfile(path_data + 'mnist/train_label.pt') 
     flag_test_data = os.path.isfile(path_data + 'mnist/test_data.pt') 
@@ -267,7 +267,7 @@ def check_mnist_dataset_exists(path_data='../../data/'):
         torch.save(test_label,path_data + 'mnist/test_label.pt')
     return path_data
 
-def check_fashion_mnist_dataset_exists(path_data='../../data/'):
+def check_fashion_mnist_dataset_exists(path_data='./data/'):
     flag_train_data = os.path.isfile(path_data + 'fashion-mnist/train_data.pt') 
     flag_train_label = os.path.isfile(path_data + 'fashion-mnist/train_label.pt') 
     flag_test_data = os.path.isfile(path_data + 'fashion-mnist/test_data.pt') 
@@ -296,7 +296,7 @@ def check_fashion_mnist_dataset_exists(path_data='../../data/'):
         torch.save(test_label,path_data + 'fashion-mnist/test_label.pt')
     return path_data
 
-def check_cifar_dataset_exists(path_data='../../data/'):
+def check_cifar_dataset_exists(path_data='./data/'):
     flag_train_data = os.path.isfile(path_data + 'cifar/train_data.pt') 
     flag_train_label = os.path.isfile(path_data + 'cifar/train_label.pt') 
     flag_test_data = os.path.isfile(path_data + 'cifar/test_data.pt') 
@@ -326,7 +326,7 @@ def check_cifar_dataset_exists(path_data='../../data/'):
     return path_data
 
 
-def check_cifar100_dataset_exists(path_data='../../data/'):
+def check_cifar100_dataset_exists(path_data='./data/'):
     flag_train_data = os.path.isfile(path_data + 'cifar100/train_data.pt')
     flag_train_label = os.path.isfile(path_data + 'cifar100/train_label.pt')
     flag_test_data = os.path.isfile(path_data + 'cifar100/test_data.pt')
