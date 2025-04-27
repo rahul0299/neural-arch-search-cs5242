@@ -465,6 +465,8 @@ def reset_experiment(name, controller_type="CNN"):
 
     child_file_path = os.path.join(os.path.join("Models", "Child", controller_type, f"{name}.pt"))
 
+    log_file_path = os.path.join(os.path.join("LogFiles", "TrainingLogs", f"{name}.log"))
+
     if os.path.exists(model_file_path):
         os.remove(model_file_path)
 
@@ -473,6 +475,9 @@ def reset_experiment(name, controller_type="CNN"):
 
     if os.path.exists(child_file_path):
         os.remove(child_file_path)
+
+    if os.path.exists(log_file_path):
+        os.remove(log_file_path)
 
 
 def cleanup_child_model(child_model=None):
