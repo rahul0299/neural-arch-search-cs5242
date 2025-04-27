@@ -110,35 +110,54 @@ def plot_metrics(df, experiment_name, metrics=None, labels=None, titles=None, co
     # fig, axs = plt.subplots(3, 1, figsize=(10, 12))
     fig.suptitle(f"{experiment_name} Controller Training Progress", fontsize=16)
 
-    for i, metric in enumerate(metrics):
-        axs[i].plot(df[metric], label=labels[metric], color=colors[metric] if metric in colors else get_random_color_hex_code())
-
-
-        # SAMPLE REFERENCE
-        # references = {
-        #     "test_acc": [
-        #         {
-        #             "value": 0.7765,
-        #             "label": "LeNet",
-        #             "color": "tab:blue"
-        #         },
-        #         {
-        #             "value": 0.8125,
-        #             "label": "VGG11"
-        #         }
-        #     ]
-        # }
-
+    if len(metrics) == 1:
+        metric = metrics[0]
+        axs.plot(df[metric], label=labels[metric],
+                    color=colors[metric] if metric in colors else get_random_color_hex_code())
 
         if references is not None and metric in references:
             for ref in references[metric]:
-                axs[i].axhline(ref["value"], color=ref["color"] if "color" in ref else get_random_color_hex_code(), linestyle='--', label=ref["label"])
+                axs.axhline(ref["value"], color=ref["color"] if "color" in ref else get_random_color_hex_code(),
+                               linestyle='--', label=ref["label"])
 
-        axs[i].set_title(titles[metric])
-        axs[i].set_xlabel("Iteration")
-        axs[i].set_ylabel(metric)
-        axs[i].grid(True)
-        axs[i].legend()
+        axs.set_title(titles[metric])
+        axs.set_xlabel("Iteration")
+        axs.set_ylabel(metric)
+        axs.grid(True)
+        axs.legend()
+
+    else:
+        for i, metric in enumerate(metrics):
+            axs[i].plot(df[metric], label=labels[metric],
+                        color=colors[metric] if metric in colors else get_random_color_hex_code())
+
+            # SAMPLE REFERENCE
+            # references = {
+            #     "test_acc": [
+            #         {
+            #             "value": 0.7765,
+            #             "label": "LeNet",
+            #             "color": "tab:blue"
+            #         },
+            #         {
+            #             "value": 0.8125,
+            #             "label": "VGG11"
+            #         }
+            #     ]
+            # }
+
+            if references is not None and metric in references:
+                for ref in references[metric]:
+                    axs[i].axhline(ref["value"], color=ref["color"] if "color" in ref else get_random_color_hex_code(),
+                                   linestyle='--', label=ref["label"])
+
+            axs[i].set_title(titles[metric])
+            axs[i].set_xlabel("Iteration")
+            axs[i].set_ylabel(metric)
+            axs[i].grid(True)
+            axs[i].legend()
+
+
 
     plt.tight_layout(rect=[0, 0, 1, 0.96])
     plt.show()
