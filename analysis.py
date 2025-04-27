@@ -187,15 +187,27 @@ def compare_metrics(df_list, df_names, df_colors, metrics=None, labels=None, tit
     # fig, axs = plt.subplots(3, 1, figsize=(10, 12))
     fig.suptitle(" vs ".join(df_names), fontsize=16)
 
-    for i, metric in enumerate(metrics):
+    if len(metrics) == 1:
+        metric = metrics[0]
         for j, df in enumerate(df_list):
-            axs[i].plot(df[metric], label=labels[metric], color=df_colors[j])
+            axs.plot(df[metric], label=labels[metric], color=df_colors[j])
 
-        axs[i].set_title(titles[metric])
-        axs[i].set_xlabel("Iteration")
-        axs[i].set_ylabel(metric)
-        axs[i].grid(True)
-        axs[i].legend(df_names)
+            axs.set_title(titles[metric])
+            axs.set_xlabel("Iteration")
+            axs.set_ylabel(metric)
+            axs.grid(True)
+            axs.legend(df_names)
+
+    else:
+        for i, metric in enumerate(metrics):
+            for j, df in enumerate(df_list):
+                axs[i].plot(df[metric], label=labels[metric], color=df_colors[j])
+
+            axs[i].set_title(titles[metric])
+            axs[i].set_xlabel("Iteration")
+            axs[i].set_ylabel(metric)
+            axs[i].grid(True)
+            axs[i].legend(df_names)
 
     plt.tight_layout(rect=[0, 0, 1, 0.96])
     plt.show()
