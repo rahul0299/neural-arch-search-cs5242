@@ -65,5 +65,3 @@ def parse_training_log(LOG_PATH="Sample_Log.log", CSV_OUTPUT_PATH="final_conv_la
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(results)
-
-    print(f"✅ Fixed padding captured and exported {len(results)} models to {CSV_OUTPUT_PATH}")
