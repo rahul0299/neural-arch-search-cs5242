@@ -12,8 +12,6 @@ from CNN_NAS.CNNController import CNNController
 
 import copy
 
-from CNN_NAS.ChildCNNModel import ChildCNNModel
-
 cmap = sns.diverging_palette(262, 10, sep=1, n=16, s=99, l=50, center="dark", as_cmap=True) # best
 
 
